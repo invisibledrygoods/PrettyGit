@@ -16,9 +16,7 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     
     <script>
-      var url = location.hash.substring(1) || "/invisibledrygoods/PrettyGit/README.md";
-
-      $.get("//raw.githubusercontent.com" + url, function(data) {
+      $.get(location.hash.substring(1) || "/invisibledrygoods/PrettyGit/README.md", function(data) {
         $('body').html(new Showdown.converter().makeHtml(data));
       });
     </script>
