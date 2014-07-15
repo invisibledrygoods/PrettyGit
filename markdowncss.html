@@ -16,7 +16,9 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     
     <script>
-      $.get("//raw.githubusercontent.com" + location.hash.substring(1), function(data) {
+      var url = location.hash.substring(1) || "/invisibledrygoods/PrettyGit/README.md";
+
+      $.get("//raw.githubusercontent.com" + url, function(data) {
         $('body').html(new Showdown.converter().makeHtml(data));
       });
     </script>
@@ -26,4 +28,3 @@
     <h1>Loading...</h1>
   </body>
 </html>
-
