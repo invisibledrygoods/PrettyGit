@@ -10,19 +10,43 @@
       h1 { margin: 0 0 10px; font-size: 40px }
       h2 { margin: 40px 0 10px; font-size: 32px; }
       h3, h4, h5, h6 { margin: 20px 0px 10px; font-size: 21px; }
+      td { padding: 0 1em; }
+      table { padding-top: 1em; }
     </style>
     
-    <script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    <!--script src="//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script-->
+    <script src="//cdn.rawgit.com/chjj/marked/8beee33b8188ca9951a4bbbf0413e4c1d07e5baa/marked.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     
     <script>
-      $.get(location.hash.substring(1) || "/invisibledrygoods/PrettyGit/master/README.md", function(data) {
-        $('body').html(new Showdown.converter().makeHtml(data));
+      var i = 0;
+      var loading = "Loading...";
+      var loadInterval = window.setInterval(function() {
+        $("#loading").html(
+          loading.substr(0, i)
+          + "<strong>"
+          + loading.substr(i, 1)
+          + "</strong>"
+          + loading.substr(i + 1)
+        );
+
+        i++;
+        i %= loading.length;
+      }, 300);
+
+      $(document).ajaxError(function() {
+        clearInterval(loadInterval);
+        $('#loading').html("error loading " + location.hash.substring(1));
+      });
+
+      $.get(location.hash.substring(1) || "http://rawgit.com/invisibledrygoods/PrettyGit/master/README.md", function(data) {
+        clearInterval(loadInterval);
+        $('body').html(marked(data));
       });
     </script>
   </head>
   
   <body>
-    <h1>Loading...</h1>
+    <center><h1 id='loading'></h1></center>
   </body>
 </html>
