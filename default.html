@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>PrettyGit</title>
+    <title>PrettyHub</title>
     <link href="//kevinburke.bitbucket.org/markdowncss/markdown.css" rel="stylesheet"/>
     
     <style>
@@ -38,7 +38,7 @@
         $('#loading').html("error loading " + location.hash.substring(1));
       });
 
-      $.get(location.hash.substring(1) || "http://rawgit.com/invisibledrygoods/PrettyGit/master/README.md", function(data) {
+      $.get(location.hash.substring(1) || "http://rawgit.com/invisibledrygoods/PrettyHub/master/README.md", function(data) {
         clearInterval(loadInterval);
         $('body').html(marked(data));
       });
